@@ -1,0 +1,110 @@
+Input:
+The test code is written on the Driver.java
+
+Output:
+Reading completed!
+Name: Ford's Focus Wagon ZTW
+
+Base Price: 18445.0
+
+Color
+Name: Fort Knox Gold Clearcoat Metallic
+Price: $0.0
+Name: Liquid Grey Clearcoat Metallic
+Price: $0.0
+Name: Infra-Red Clearcoat
+Price: $0.0
+Name: Grabber Green Clearcoat Metallic
+Price: $0.0
+Name: Sangria Red Clearcoat Metallic
+Price: $0.0
+Name: French Blue Clearcoat Metallic
+Price: $0.0
+Name: Twilight Blue Clearcoat Metallic
+Price: $0.0
+Name: CD Silver Clearcoat Metallic
+Price: $0.0
+Name: Pitch Black Clearcoat
+Price: $0.0
+Name: Cloud 9 White Clearcoat
+Price: $0.0
+
+Transmission
+Name: Automatic
+Price: $0.0
+Name: Manual
+Price: $-815.0
+
+Brakes/Traction Control
+Name: Standard
+Price: $0.0
+Name: ABS
+Price: $400.0
+Name: ABS with Advance Trac
+Price: $1625.0
+
+Side Impact Air Bags
+Name: present
+Price: $350.0
+Name: not present
+Price: $0.0
+
+Power Moonroof
+Name: present
+Price: $595.0
+Name: not present
+Price: $0.0
+
+Serialized object written to file: /Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/Ford's Focus Wagon ZTW.ser
+The file Ford's Focus Wagon ZTW.ser is deserialized.
+Name: Ford's Focus Wagon ZTW
+
+Base Price: 18445.0
+
+Color
+Name: Fort Knox Gold Clearcoat Metallic
+Price: $0.0
+Name: Liquid Grey Clearcoat Metallic
+Price: $0.0
+Name: Infra-Red Clearcoat
+Price: $0.0
+Name: Grabber Green Clearcoat Metallic
+Price: $0.0
+Name: Sangria Red Clearcoat Metallic
+Price: $0.0
+Name: French Blue Clearcoat Metallic
+Price: $0.0
+Name: Twilight Blue Clearcoat Metallic
+Price: $0.0
+Name: CD Silver Clearcoat Metallic
+Price: $0.0
+Name: Pitch Black Clearcoat
+Price: $0.0
+Name: Cloud 9 White Clearcoat
+Price: $0.0
+
+Transmission
+Name: Automatic
+Price: $0.0
+Name: Manual
+Price: $-815.0
+
+Brakes/Traction Control
+Name: Standard
+Price: $0.0
+Name: ABS
+Price: $400.0
+Name: ABS with Advance Trac
+Price: $1625.0
+
+Side Impact Air Bags
+Name: present
+Price: $350.0
+Name: not present
+Price: $0.0
+
+Power Moonroof
+Name: present
+Price: $595.0
+Name: not present
+Price: $0.0
