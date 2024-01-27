@@ -12,14 +12,15 @@ import java.io.IOException;
 import Exception.AutoException;
 
 public class Driver {
+
     public static void main(String[] args) throws AutoException {
 
-try {
-    BuildAuto newAuto = new BuildAuto();
-    newAuto.buildAuto("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/info.txt");
-    newAuto.printAuto("ZSW");
-}catch (AutoException e){
+        BuildAuto newAuto = new BuildAuto();
+        newAuto.setUtil("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/info.txt");
 
-}
+        newAuto.buildAuto();
+        newAuto.printAuto();
+
     }
+
 }
