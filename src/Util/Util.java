@@ -7,15 +7,28 @@ package Util;
 
 import Model.Automobile;
 import Model.OptionSet;
+import Exception.*;
 
 import java.io.*;
+import java.util.NoSuchElementException;
+
 public class Util {
     private String filePath;
-    public Util(){}
+    private Fix1to100 fix1to100;
+    public Util(){fix1to100 = new Fix1to100();}
     public Util(String f){
         filePath = f;
     }
-    public Automobile readFile(String fileName){
+
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Automobile readFile() throws AutoException{
         Automobile automotive = new Automobile();
         int numOfOptionSets;
         int numOfOptions;
@@ -25,17 +38,35 @@ public class Util {
         int optionCounter = 0;
         try {
             //FileReader and BufferedReader for standard file operation
-            FileReader file = new FileReader(fileName);
+            FileReader file = new FileReader(filePath);
             BufferedReader buff = new BufferedReader(file);
-            automotive.setName(buff.readLine());//set the first line in txt to automotive name
-            automotive.setBasePrice(Double.parseDouble(buff.readLine()));//set the second line in txt to automotive basePrice
-            numOfOptionSets = Integer.parseInt(buff.readLine());//set the third line in txt to the # of OptionSet
+            String valueHolder = buff.readLine(); //valueHolder for determine AutoException
+            if(valueHolder.equals("")){
+                throw new AutoException(1, "Missing Automobile Name.");
+            }
+            automotive.setName(valueHolder);//set the first line in txt to automotive name
+
+            valueHolder = buff.readLine();
+            if(valueHolder.equals("")){
+                throw new AutoException(2, "Missing Automobile Base Price.");
+            }
+            automotive.setBasePrice(Double.parseDouble(valueHolder));//set the second line in txt to automotive basePrice
+
+            valueHolder = buff.readLine();
+            if(valueHolder.equals("")){
+                throw new AutoException(3, "Missing Number of OptionSets.");
+            }
+            numOfOptionSets = Integer.parseInt(valueHolder);//set the third line in txt to the # of OptionSet
+
             automotive.openSpaceForOptionSet(numOfOptionSets);//open space for OptionSet Array
             boolean eof = false;
             while (!eof) {
                 String line = buff.readLine();
-                if (line.equals("")){
+                if (line.equals("/")){
                     name = buff.readLine();
+                    if (name.equals("")){
+                        throw new AutoException(4, "Missing OptionSet Name.");
+                    }
                     numOfOptions = Integer.parseInt(buff.readLine());
                     automotive.setOpset(counter,name,numOfOptions);
                     counter++;
@@ -48,6 +79,9 @@ public class Util {
                 }
                 else {
                     name = line;
+                    if(name .equals("")){
+                        throw new AutoException(5, "Missing Option Name.");
+                    }
                     price = Double.parseDouble(buff.readLine());
                     OptionSet optionSet = automotive.getOptionSet(counter - 1);
                     automotive.setOption(optionCounter, optionSet, name, price);
@@ -57,6 +91,14 @@ public class Util {
             buff.close();
         } catch (IOException e) {
             System.out.println("Error " + e.toString());
+            throw new AutoException(6, "Unable to open file.");
+        }
+        catch (NumberFormatException e){
+            System.out.println("Error " + e.toString());
+            throw new AutoException(7, "Missing Price.");
+        }
+        catch (AutoException e){
+            //
         }
         return automotive;
     }
@@ -86,7 +128,7 @@ public class Util {
     }
 
     //Deserializing method that reads the .ser file and return the object
-    public Automobile deserializeAutomotive(String name) throws IOException {
+    public Automobile deserializeAutomotive(String name) throws IOException, AutoException {
         ObjectInputStream os = null;
         Automobile automotive;
         String prePath = "/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/";
@@ -112,8 +154,8 @@ public class Util {
         }
         catch(IOException e)
         {
-            e.printStackTrace();
-            return null;
+            System.out.printf("Error -- " + e.toString());
+            throw new AutoException(1,"Unable to open file");
         }
         catch(ClassNotFoundException e){
             e.printStackTrace();

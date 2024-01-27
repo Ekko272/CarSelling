@@ -1,7 +1,7 @@
 Ford's Focus Wagon ZTW
 18445
 5
-
+/
 Color
 10
 Fort Knox Gold Clearcoat Metallic
@@ -24,14 +24,14 @@ Pitch Black Clearcoat
 0
 Cloud 9 White Clearcoat
 0
-
+/
 Transmission
 2
 Automatic
 0
 Manual
 -815
-
+/
 Brakes/Traction Control
 3
 Standard
@@ -40,14 +40,14 @@ ABS
 400
 ABS with Advance Trac
 1625
-
+/
 Side Impact Air Bags
 2
 present
 350
 not present
 0
-
+/
 Power Moonroof
 2
 present

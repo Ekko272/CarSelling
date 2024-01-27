@@ -5,17 +5,21 @@
  */
 package Driver;
 
+import Adapter.BuildAuto;
 import Model.Automobile;
 import Util.Util;
 import java.io.IOException;
+import Exception.AutoException;
 
 public class Driver {
-    public static void main(String[] args) throws IOException {
-        Util util = new Util();
-        Automobile FordZTW = util.readFile("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/info.txt");
-        FordZTW.print();
-        util.serializeAutomotive(FordZTW);
-        Automobile newFordZTW = util.deserializeAutomotive("Ford's Focus Wagon ZTW");
-        newFordZTW.print();
+    public static void main(String[] args) throws AutoException {
+
+try {
+    BuildAuto newAuto = new BuildAuto();
+    newAuto.buildAuto("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/info.txt");
+    newAuto.printAuto("ZSW");
+}catch (AutoException e){
+
+}
     }
 }

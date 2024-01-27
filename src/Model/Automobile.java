@@ -52,6 +52,17 @@ public class Automobile implements Serializable {
         }
     }
 
+    public void print(String modelName){
+        System.out.printf("Name: " + modelName + "\n");
+        System.out.printf("\n");
+        System.out.printf("Base Price: " + basePrice + "\n");
+        System.out.printf("\n");
+        for(int i = 0; i < opset.length; i++){
+            printOneOptionSet(i);
+            System.out.printf("\n");
+        }
+    }
+
     //Open space for array
     public void openSpaceForOptionSet(int size){
         opset = new OptionSet[size];
@@ -128,11 +139,20 @@ public class Automobile implements Serializable {
         return null;
     }
 
+    public int findOptionWithNameWithKnownOptionSet(int optSetIndex, String name){
+        for(int i = 0; i < opset[optSetIndex].getOpt().length; i++){
+            if(opset[optSetIndex].getOptByIndex(i).getName().equals(name)){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     // Update methods with three overload methods, they return 1 if updating succeed and return -1 if failed
-    public int updateOptionSet(String name){
+    public int updateOptionSet(String name, String newName){
         int index = findOptionSetWithName(name);
         if (index != -1){
-            opset[index].setName(name);
+            opset[index].setName(newName);
             return 1;
         }
         return -1;
@@ -171,6 +191,17 @@ public class Automobile implements Serializable {
         return -1;
     }
 
+    public int updateOptionPrice(String OptionSetName, String OptionName, double newPrice){
+        int index = findOptionSetWithName(OptionSetName);
+        if (index != -1){
+            int optIndex = findOptionWithNameWithKnownOptionSet(index, OptionName);
+            if (optIndex != -1) {
+                opset[index].getOptByIndex(optIndex).setPrice(newPrice);
+                return 1;
+            }
+        }
+        return -1;
+    }
 
     //Delete methods, set the element to delete to null for now
     public int deleteOptionSet(String name){
