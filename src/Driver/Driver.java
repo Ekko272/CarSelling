@@ -15,7 +15,7 @@ public class Driver {
         */
 
         BuildAuto newAuto = new BuildAuto();
-        newAuto.setUtil("This is a wrong file path....");
+        newAuto.setUtil("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/info.txt");
 
         newAuto.buildAuto();
         newAuto.printAuto();

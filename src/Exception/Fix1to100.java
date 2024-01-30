@@ -39,21 +39,20 @@ public class Fix1to100 {
         return num;
     }
 
-    public String fix1(){
+    public String fix1() {
         System.out.println("Enter the Automobile Name: ");
-        return s1.nextLine();
+        String name = s1.nextLine();
+        return name;
     }
 
-    public double fix2(){
+    public String fix2(){
         System.out.println("Enter the Automobile Base Price: ");
-        double temp = ensureInputValidDouble();
-        return temp;
+        return String.valueOf(ensureInputValidDouble());
     }
 
-    public int fix3(){
+    public String fix3(){
         System.out.println("Enter the Number of OptionSets of the Automobile: ");
-        int temp = ensureInputValidInt();
-        return temp;
+        return String.valueOf(ensureInputValidInt());
     }
 
     public String fix4(){
@@ -66,16 +65,16 @@ public class Fix1to100 {
         return s1.nextLine();
     }
 
-    public String fix6(){
+    public String fix6(String fName){
         System.out.println("Problem [Unable To Open File]");
         System.out.println("Problem Fixing...");
         return "/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/info.txt";
     }
 
-    public double fix7(){
+    public String fix7(){
         System.out.println("Enter the Option Price: ");
-        double temp = ensureInputValidDouble();
-        return temp;
+        return String.valueOf(ensureInputValidDouble());
+
     }
 
 }

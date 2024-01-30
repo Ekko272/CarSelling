@@ -1,5 +1,5 @@
 package Adapter;
 
 public interface FixAuto {
-    public String fixProblem(int errorNuum);
+    public void fixProblem(int errorNuum, String[] temp);
 }

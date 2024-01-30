@@ -102,37 +102,47 @@ public class AutoException extends Exception implements FixAuto{
     }
 
 
-    public String fixProblem(int errorNuum){
+    public void fixProblem(int errorNuum, String[] temp){
+
         Fix1to100 f1 = new Fix1to100();
         switch (errorNuum){
             case 1:
                 writeFixMsgToFile();
-                return f1.fix1();
+                temp[0] = f1.fix1();
+                break;
+
             case 2:
                 writeFixMsgToFile();
-                return Double.toString(f1.fix2());
+                temp[0] = f1.fix2();
+                break;
             case 3:
                 writeFixMsgToFile();
-                return Integer.toString(f1.fix3());
+                temp[0] = f1.fix3();
+                break;
             case 4:
                 writeFixMsgToFile();
-                return f1.fix4();
+                temp[0] = f1.fix4();
+                break;
             case 5:
                 writeFixMsgToFile();
-                return f1.fix5();
+                temp[0] = f1.fix5();
+                break;
             case 6:
                 System.out.println("Now entering fix [" + errorNuum + "]");
-                String correctFileName = f1.fix6();
+                //f1.fix6(temp);
                 System.out.println("Problem Fixed.");
                 writeFixMsgToFile();
-                return correctFileName;
+                break;
             case 7:
                 writeFixMsgToFile();
-                return Double.toString(f1.fix7());
+                temp[0] = f1.fix7();
+                break;
+
+
             default:
                 System.out.println("You Should Not See This Message...");
         }
-        return "";
+
     }
 
 

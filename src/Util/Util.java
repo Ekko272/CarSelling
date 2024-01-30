@@ -31,111 +31,135 @@ public class Util {
         int numOfOptionSets;
         int numOfOptions;
         String name;
-        String temp;
+        String temp = "";
         double price;
         int counter = 0;
         int optionCounter = 0;
-
-        int errorCodeMet = 0;
-        String fixedValue = "";
+        String arr[] = new String[1];
         boolean pass = false;
+        boolean problemMet = false;
         do {
             try {
                 FileReader file = new FileReader(filePath);
                 BufferedReader buff = new BufferedReader(file);
                 pass = true;
-
-                String valueHolder = buff.readLine(); //valueHolder for determine AutoException
-                if(errorCodeMet == 1){
-                    valueHolder = fixedValue;
-                    errorCodeMet = 0;
+                automotive.setName(buff.readLine()); //valueHolder for determine AutoException
+                try {
+                    if (automotive.getName().equals("")) {
+                        pass = false;
+                        throw new AutoException(1, "Missing Automobile Name.");
+                    }
+                } catch (AutoException e) {
+                    e.fixProblem(1, arr);
+                    automotive.setName(arr[0]);
                     pass = true;
                 }
-                if (valueHolder.equals("")) {
-                    pass = false;
-                    throw new AutoException(1, "Missing Automobile Name.");
+                temp = buff.readLine();
+                
+                try {
+                    if (temp.equals("")) {
+                        pass = false;
+                        problemMet = true;
+                        throw new AutoException(2, "Missing Automobile Base Price.");
+                    }
+                } catch (AutoException e) {
+                    e.fixProblem(2, arr);
+                    automotive.setBasePrice(Double.parseDouble(arr[0]));
+                    pass = true;
+
                 }
 
-                automotive.setName(valueHolder);//set the first line in txt to automotive name
+                if(problemMet == false) {
+                    automotive.setBasePrice(Double.parseDouble(temp));//set the second line in txt to automotive basePrice
+                }
 
-                valueHolder = buff.readLine();
-                if(errorCodeMet == 2){
-                    valueHolder = fixedValue;
-                    errorCodeMet = 0;
+
+                problemMet = false;
+                
+                temp = buff.readLine();
+                try {
+                    if (temp.equals("")) {
+                        pass = false;
+                        problemMet = true;
+                        throw new AutoException(3, "Missing Number of OptionSets.");
+                    }
+                }catch (AutoException e){
+                    e.fixProblem(3, arr);
+                    numOfOptionSets = Integer.parseInt(arr[0]);
+                    automotive.openSpaceForOptionSet(numOfOptionSets);
                     pass = true;
                 }
-                if (valueHolder.equals("")) {
-                    pass = false;
-                    throw new AutoException(2, "Missing Automobile Base Price.");
+                if(problemMet == false) {
+                    numOfOptionSets = Integer.parseInt(temp);//set the third line in txt to the # of OptionSet
+                    automotive.openSpaceForOptionSet(numOfOptionSets);//open space for OptionSet Array
                 }
-                automotive.setBasePrice(Double.parseDouble(valueHolder));//set the second line in txt to automotive basePrice
 
-                valueHolder = buff.readLine();
-                if(errorCodeMet == 3){
-                    valueHolder = fixedValue;
-                    errorCodeMet = 0;
-                    pass = true;
-                }
-                if (valueHolder.equals("")) {
-                    pass = false;
-                    throw new AutoException(3, "Missing Number of OptionSets.");
-                }
-                numOfOptionSets = Integer.parseInt(valueHolder);//set the third line in txt to the # of OptionSet
-                automotive.openSpaceForOptionSet(numOfOptionSets);//open space for OptionSet Array
-
+                problemMet = false;
 
                 boolean eof = false;
                 while (!eof) {
                     String line = buff.readLine();
                     if (line.equals("/")) {
                         temp = buff.readLine();
-                        if (temp.equals("")) {
-                            if(errorCodeMet == 4){
-                                temp = fixedValue;
-                                errorCodeMet = 0;
-                                pass = true;
-                            }
-                            else {
+                        try {
+                            if (temp.equals("")) {
+                                problemMet = true;
+                                pass = false;
                                 throw new AutoException(4, "Missing OptionSet Name.");
                             }
+                        } catch (AutoException e) {
+                            e.fixProblem(4, arr);
+                            name = arr[0];
+                            numOfOptions = Integer.parseInt(buff.readLine());
+                            automotive.setOpset(counter, name, numOfOptions);
+                            counter++;
+                            optionCounter = 0;
+                            pass = true;
                         }
-                        name = temp;
-                        numOfOptions = Integer.parseInt(buff.readLine());
-                        automotive.setOpset(counter, name, numOfOptions);
-                        counter++;
-                        optionCounter = 0;
+
+                        if (problemMet == false) {
+                            name = temp;
+                            numOfOptions = Integer.parseInt(buff.readLine());
+                            automotive.setOpset(counter, name, numOfOptions);
+                            counter++;
+                            optionCounter = 0;
+                        }
                     }
-                    //The txt file ends with "#"
-                    else if (line.equals("#")) {
-                        eof = true;
-                        System.out.println("Reading completed!");
-                    } else {
-                        name = line;
-                        if (name.equals("")) {
-                            if(errorCodeMet == 5){
-                                name = fixedValue;
-                                errorCodeMet = 0;
+                        //The txt file ends with "#"
+                        else if (line.equals("#")) {
+                            eof = true;
+                            System.out.println("Reading completed!");
+                        } else {
+                            name = line;
+                            try {
+                                if (name.equals("")) {
+                                    pass = false;
+                                    problemMet = true;
+                                    throw new AutoException(5, "Missing Option Name.");
+                                }
+                            }catch(AutoException e){
+                                e.fixProblem(5, arr);
+                                price = Double.parseDouble(buff.readLine());
+                                OptionSet optionSet = automotive.getOptionSet(counter - 1);
+                                automotive.setOption(optionCounter, optionSet, name, price);
+                                optionCounter++;
                                 pass = true;
                             }
-                            else {
-                                throw new AutoException(5, "Missing Option Name.");
+                            if(problemMet == false) {
+                                price = Double.parseDouble(buff.readLine());
+                                OptionSet optionSet = automotive.getOptionSet(counter - 1);
+                                automotive.setOption(optionCounter, optionSet, name, price);
+                                optionCounter++;
                             }
                         }
-                        price = Double.parseDouble(buff.readLine());
-                        OptionSet optionSet = automotive.getOptionSet(counter - 1);
-                        automotive.setOption(optionCounter, optionSet, name, price);
-                        optionCounter++;
                     }
-                }
                 buff.close();
             } catch (IOException e) {
-                AutoException a = new AutoException(6, "Unable to open file.");
-                this.filePath = a.fixProblem(a.getErrorNum());
+            AutoException a = new AutoException(6, "Unable to open file.");
+            a.fixProblem(6, arr);
+            this.filePath = arr[0];
             } catch (NumberFormatException e) {
                 throw new AutoException(7, "Missing Price.");
-            } catch (AutoException e) {
-                errorCodeMet = e.getErrorNum();
-                fixedValue = e.fixProblem(errorCodeMet);
             }
         } while(!pass);
         return automotive;
