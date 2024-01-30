@@ -1,9 +1,8 @@
-Input:
-The test code is written on the Driver.java
-
-Output:
+Problem: Error #[1], Error Message: [Missing Automobile Name.]
+Enter the Automobile Name:
+FORD MUSTANG
 Reading completed!
-Name: Ford's Focus Wagon ZTW
+Name: FORD MUSTANG
 
 Base Price: 18445.0
 
@@ -55,13 +54,12 @@ Price: $595.0
 Name: not present
 Price: $0.0
 
-Serialized object written to file: /Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/Ford's Focus Wagon ZTW.ser
-The file Ford's Focus Wagon ZTW.ser is deserialized.
-Name: Ford's Focus Wagon ZTW
+Found [Color] at index 0.
+Name: FORD MUSTANG
 
 Base Price: 18445.0
 
-Color
+NewNameColor
 Name: Fort Knox Gold Clearcoat Metallic
 Price: $0.0
 Name: Liquid Grey Clearcoat Metallic
@@ -108,3 +106,6 @@ Name: present
 Price: $595.0
 Name: not present
 Price: $0.0
+
+
+Process finished with exit code 0

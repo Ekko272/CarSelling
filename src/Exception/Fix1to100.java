@@ -1,7 +1,10 @@
-package Exception;
+/**
+ * CIS 35B Assignment 2: Fix1to100.java
+ *
+ * @author Xuanyu Liu
+ */
 
-import Adapter.FixAuto;
-import Model.Automobile;
+package Exception;
 
 import java.util.Scanner;
 

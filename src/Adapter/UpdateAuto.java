@@ -1,3 +1,9 @@
+/**
+ * CIS 35B Assignment 2: UpdateAuto.java
+ *
+ * @author Xuanyu Liu
+ */
+
 package Adapter;
 import Exception.AutoException;
 public interface UpdateAuto {
