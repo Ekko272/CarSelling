@@ -1,17 +1,13 @@
 package Exception;
 
+import Adapter.FixAuto;
 import Model.Automobile;
 
 import java.util.Scanner;
 
 public class Fix1to100 {
-    private int errorNum;
     private Scanner s1 = new Scanner(System.in);
-
     public Fix1to100(){}
-    public Fix1to100(int errorNum) {
-        this.errorNum = errorNum;
-    }
 
     //This method avoid Exceptions from user input
     public double ensureInputValidDouble() {
@@ -41,14 +37,6 @@ public class Fix1to100 {
             }
         }
         return num;
-    }
-
-    public int getErrorNum() {
-        return errorNum;
-    }
-
-    public void setErrorNum(int errorNum) {
-        this.errorNum = errorNum;
     }
 
     public String fix1(){

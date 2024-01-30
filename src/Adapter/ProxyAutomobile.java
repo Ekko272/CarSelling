@@ -1,42 +1,43 @@
+/**
+ * CIS 35B Assignment 2: ProxyAutomobile.java
+ *
+ * @author Xuanyu Liu
+ */
+
 package Adapter;
 import Util.*;
 import Model.*;
 import Exception.AutoException;
 
-import javax.swing.*;
-
 public abstract class ProxyAutomobile {
-
     private static Automobile a1;
     private Util util;
+
 
     public ProxyAutomobile(){
         this.util = new Util();
     }
     public ProxyAutomobile(String fileName){
-        this.util.setFilePath(fileName);
+        this.util = new Util((fileName));
     }
-
     public static Automobile getA1() {
         return a1;
     }
-
     public static void setA1(Automobile a1) {
         ProxyAutomobile.a1 = a1;
     }
-
     public Util getUtil() {
         return util;
     }
-
     public void setUtil(Util util) {
         this.util = util;
     }
-
     public void setUtil(String fileName)
     {
         this.util.setFilePath(fileName);
     }
+
+
     public void buildAuto(String fileName) throws AutoException {
         util.setFilePath(fileName);
         a1 = util.readFile();

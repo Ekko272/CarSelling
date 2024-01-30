@@ -10,3 +10,15 @@
 2024-01-27 15:17:03 Error Number: 1 Missing Automobile Name.
 2024-01-27 15:27:23 Error Number: 1 Missing Automobile Name.
 2024-01-27 15:27:39 Error Number: 3 Missing Number of OptionSets.
+2024-01-27 16:48:05 Error Number: 1 Missing Automobile Name.
+
+2024-01-27 16:56:58 Error Number: 6 Unable to open file.
+
+2024-01-27 16:58:03 Error Number: 6 Unable to open file.
+
+2024-01-27 16:58:03 ----The Error Has Been Fixed----
+
+2024-01-29 19:43:32 Error Number: 6 Unable to open file.
+
+2024-01-29 19:43:32 ----The Error Has Been Fixed----
+

@@ -6,20 +6,20 @@
 package Driver;
 
 import Adapter.BuildAuto;
-import Model.Automobile;
-import Util.Util;
-import java.io.IOException;
 import Exception.AutoException;
 
 public class Driver {
-
     public static void main(String[] args) throws AutoException {
+        /*
+        The Model name is missing intentionally on the text file for testing the fixing method
+        */
 
         BuildAuto newAuto = new BuildAuto();
-        newAuto.setUtil("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/info.txt");
+        newAuto.setUtil("This is a wrong file path....");
 
         newAuto.buildAuto();
         newAuto.printAuto();
+
 
     }
 

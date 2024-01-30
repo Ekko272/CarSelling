@@ -81,15 +81,23 @@ public class Util {
                     throw new AutoException(3, "Missing Number of OptionSets.");
                 }
                 numOfOptionSets = Integer.parseInt(valueHolder);//set the third line in txt to the # of OptionSet
-
                 automotive.openSpaceForOptionSet(numOfOptionSets);//open space for OptionSet Array
+
+
                 boolean eof = false;
                 while (!eof) {
                     String line = buff.readLine();
                     if (line.equals("/")) {
                         temp = buff.readLine();
                         if (temp.equals("")) {
-                            throw new AutoException(4, "Missing OptionSet Name.");
+                            if(errorCodeMet == 4){
+                                temp = fixedValue;
+                                errorCodeMet = 0;
+                                pass = true;
+                            }
+                            else {
+                                throw new AutoException(4, "Missing OptionSet Name.");
+                            }
                         }
                         name = temp;
                         numOfOptions = Integer.parseInt(buff.readLine());
@@ -104,7 +112,14 @@ public class Util {
                     } else {
                         name = line;
                         if (name.equals("")) {
-                            throw new AutoException(5, "Missing Option Name.");
+                            if(errorCodeMet == 5){
+                                name = fixedValue;
+                                errorCodeMet = 0;
+                                pass = true;
+                            }
+                            else {
+                                throw new AutoException(5, "Missing Option Name.");
+                            }
                         }
                         price = Double.parseDouble(buff.readLine());
                         OptionSet optionSet = automotive.getOptionSet(counter - 1);
@@ -117,12 +132,10 @@ public class Util {
                 AutoException a = new AutoException(6, "Unable to open file.");
                 this.filePath = a.fixProblem(a.getErrorNum());
             } catch (NumberFormatException e) {
-                System.out.println("Error " + e.toString());
                 throw new AutoException(7, "Missing Price.");
             } catch (AutoException e) {
                 errorCodeMet = e.getErrorNum();
                 fixedValue = e.fixProblem(errorCodeMet);
-
             }
         } while(!pass);
         return automotive;
