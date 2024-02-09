@@ -6,10 +6,12 @@
 
 package Model;
 
+import Adapter.ChoiceAuto;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Automobile implements Serializable {
+public class Automobile implements Serializable, ChoiceAuto {
     private String name;
     private String make;
     private String model;
@@ -111,6 +113,7 @@ public class Automobile implements Serializable {
         this.model = model;
     }
 
+    @Override
     public String getOptionChoice(String opSetName){
         for(OptionSet optionSet : opset){
             if(optionSet.getName() == opSetName){
@@ -119,6 +122,7 @@ public class Automobile implements Serializable {
         }
             return null;
     }
+    @Override
     public void setOptionChoice(String setName, String optionName){
         for(OptionSet optionSet : opset){
             if(optionSet.getName() == setName){
@@ -131,6 +135,7 @@ public class Automobile implements Serializable {
             }
         }
     }
+    @Override
     public double getOptionChoicePrice(String optionName){
         for(OptionSet optionSet : opset){
             for(OptionSet.Option option : optionSet.getOpt()){
@@ -140,6 +145,15 @@ public class Automobile implements Serializable {
             }
         }
         return -1;
+    }
+
+    @Override
+    public double getTotalPrice() {
+        double totalPrice = 0;
+        for(OptionSet optionSet : opset){
+            totalPrice += optionSet.getOptionChoice().getPrice();
+        }
+        return totalPrice;
     }
 
     //Find option set with given name, return the index number of it if found, return -1 if not
