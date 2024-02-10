@@ -4,6 +4,9 @@
  * @author Xuanyu Liu
  */
 
+/*
+Comments for the added synchronized methods:
+*/
 package Model;
 
 import Adapter.ChoiceAuto;
@@ -65,19 +68,19 @@ public class Automobile implements Serializable, ChoiceAuto {
     }
 
     //Getters and setters
-    public String getName() {
+    public synchronized String getName() {
         return name;
     }
-    public void setName(String name) {
+    public synchronized void setName(String name) {
         this.name = name;
     }
-    public double getBasePrice() {
+    public synchronized double getBasePrice() {
         return basePrice;
     }
-    public void setBasePrice(double basePrice) {
+    public synchronized void setBasePrice(double basePrice) {
         this.basePrice = basePrice;
     }
-    public OptionSet getOptionSet(int i){
+    public synchronized OptionSet getOptionSet(int i){
         try {
             return opset.get(i);
         }catch (NullPointerException e){
@@ -85,31 +88,31 @@ public class Automobile implements Serializable, ChoiceAuto {
             return null;
         }
     }
-    public void setOpset(int index, OptionSet Op){
+    public synchronized void setOpset(int index, OptionSet Op){
         opset.set(index, Op);
     }
-    public void setOpset(int index, String name, int optSize){
-        opset.set(index, new OptionSet(name, optSize));
+    public synchronized void setOpset(int index, String name){
+        opset.set(index, new OptionSet(name));
     }
-    public void addOpset(int index, String name, int size){
-        opset.add(index, new OptionSet(name, size));
+    public synchronized void addOpset(int index, String name){
+        opset.add(index, new OptionSet(name));
     }
-    public void setOption(int index, OptionSet Op, String name, double price){
+    public synchronized void setOption(int index, OptionSet Op, String name, double price){
         Op.setOpt(name, price, index);
     }
-    public void addOption(int index, OptionSet Op, String name, double price){
+    public synchronized void addOption(int index, OptionSet Op, String name, double price){
         Op.addOpt(name, price, index);
     }
-    public String getMake() {
+    public synchronized String getMake() {
         return make;
     }
-    public void setMake(String make) {
+    public synchronized void setMake(String make) {
         this.make = make;
     }
     public String getModel() {
         return model;
     }
-    public void setModel(String model) {
+    public synchronized void setModel(String model) {
         this.model = model;
     }
 
@@ -123,7 +126,7 @@ public class Automobile implements Serializable, ChoiceAuto {
             return null;
     }
     @Override
-    public void setOptionChoice(String setName, String optionName){
+    public synchronized void setOptionChoice(String setName, String optionName){
         for(OptionSet optionSet : opset){
             if(optionSet.getName() == setName){
                 for(OptionSet.Option option : optionSet.getOpt()){
@@ -136,7 +139,7 @@ public class Automobile implements Serializable, ChoiceAuto {
         }
     }
     @Override
-    public double getOptionChoicePrice(String optionName){
+    public synchronized double getOptionChoicePrice(String optionName){
         for(OptionSet optionSet : opset){
             for(OptionSet.Option option : optionSet.getOpt()){
                 if(option.getName() == optionName){
@@ -148,7 +151,7 @@ public class Automobile implements Serializable, ChoiceAuto {
     }
 
     @Override
-    public double getTotalPrice() {
+    public synchronized double getTotalPrice() {
         double totalPrice = 0;
         for(OptionSet optionSet : opset){
             totalPrice += optionSet.getOptionChoice().getPrice();
@@ -157,7 +160,7 @@ public class Automobile implements Serializable, ChoiceAuto {
     }
 
     //Find option set with given name, return the index number of it if found, return -1 if not
-    public int findOptionSetWithName(String name){
+    public synchronized int findOptionSetWithName(String name){
         for(int i = 0; i < opset.size(); i++){
             if (opset.get(i).getName().equals(name)){
                 System.out.printf("Found [" + name + "] at index " + i + ".\n");
@@ -170,7 +173,7 @@ public class Automobile implements Serializable, ChoiceAuto {
 
     // Find option with given name, if found, return an array which stores the index of OptionSet and the index of the option to find
     // return null if option doesn't exist
-    public int[] findOptionWithName(String name){
+    public synchronized int[] findOptionWithName(String name){
         int indexArr[] = new int[2];
         for(int i = 0; i < opset.size(); i++){
             for(int j = 0; j < opset.get(i).getOpt().size(); j++){
@@ -186,7 +189,7 @@ public class Automobile implements Serializable, ChoiceAuto {
         return null;
     }
 
-    public int findOptionWithNameWithKnownOptionSet(int optSetIndex, String name){
+    public synchronized int findOptionWithNameWithKnownOptionSet(int optSetIndex, String name){
         for(int i = 0; i < opset.get(optSetIndex).getOpt().size(); i++){
             if(opset.get(optSetIndex).getOptByIndex(i).getName().equals(name)){
                 return i;
@@ -196,7 +199,7 @@ public class Automobile implements Serializable, ChoiceAuto {
     }
 
     // Update methods with three overload methods, they return 1 if updating succeed and return -1 if failed
-    public int updateOptionSet(String name, String newName){
+    public synchronized int updateOptionSet(String name, String newName){
         int index = findOptionSetWithName(name);
         if (index != -1){
             opset.get(index).setName(newName);
@@ -206,8 +209,8 @@ public class Automobile implements Serializable, ChoiceAuto {
     }
 
 
-    public int updateOption(String name, String newName, double newPrice){
-        int index[] = findOptionWithName(name);
+    public synchronized int updateOption(String name, String newName, double newPrice){
+        int []index = findOptionWithName(name);
         if (index != null){
             opset.get(index[0]).setOpt(newName, newPrice, index[1]);
             System.out.printf("Successfully updated!\n");
@@ -217,7 +220,7 @@ public class Automobile implements Serializable, ChoiceAuto {
         return -1;
     }
 
-    public int updateOption(String name, String newName){
+    public synchronized int updateOption(String name, String newName){
         int index[] = findOptionWithName(name);
         if (index != null){
             opset.get(index[0]).getOptByIndex(index[1]).setName(newName);
@@ -227,7 +230,7 @@ public class Automobile implements Serializable, ChoiceAuto {
         System.out.printf("Update failed!\n");
         return -1;
     }
-    public int updateOption(String name,double newPrice){
+    public synchronized int updateOption(String name,double newPrice){
         int index[] = findOptionWithName(name);
         if (index != null){
             opset.get(index[0]).getOptByIndex(index[1]).setPrice(newPrice);
@@ -238,7 +241,7 @@ public class Automobile implements Serializable, ChoiceAuto {
         return -1;
     }
 
-    public int updateOptionPrice(String OptionSetName, String OptionName, double newPrice){
+    public synchronized int updateOptionPrice(String OptionSetName, String OptionName, double newPrice){
         int index = findOptionSetWithName(OptionSetName);
         if (index != -1){
             int optIndex = findOptionWithNameWithKnownOptionSet(index, OptionName);
@@ -251,7 +254,7 @@ public class Automobile implements Serializable, ChoiceAuto {
     }
 
     //Delete methods, set the element to delete to null for now
-    public int deleteOptionSet(String name){
+    public synchronized int deleteOptionSet(String name){
         int index = findOptionSetWithName(name);
         if(index == -1) {
             System.out.printf("Option set doesn't exist!\n");
@@ -266,7 +269,7 @@ public class Automobile implements Serializable, ChoiceAuto {
         return 1;
     }
 
-    public int deleteOptionSet(int index){
+    public synchronized int deleteOptionSet(int index){
         try {
             opset.get(index).setName(null);
             for (int i = 0; i < opset.get(index).getOpt().size(); i++) {
@@ -282,25 +285,23 @@ public class Automobile implements Serializable, ChoiceAuto {
 
     }
 
-    public int deleteOption(int x, int y){
+    public synchronized int deleteOption(int x, int y){
         try {
-            opset.get(x).getOptByIndex(y).setName(null);
-            opset.get(x).getOptByIndex(y).setPrice(0);
+            opset.get(x).getOpt().remove(y);
             return 1;
         }catch (NullPointerException e) {
-            e.toString();
+            e.printStackTrace();
             return -1;
         }
     }
 
-    public int deleteOption(String name){
+    public synchronized int deleteOption(String name){
         int[] indexArr = findOptionWithName(name);
         if (indexArr == null){
             System.out.printf("Option doesn't exist!\n");
             return -1;
         }
-        opset.get(indexArr[0]).getOptByIndex(indexArr[1]).setName(null);
-        opset.get(indexArr[0]).getOptByIndex(indexArr[1]).setPrice(0);
+        opset.get(indexArr[0]).getOpt().remove(indexArr[1]);
         System.out.printf("Delete succeed!\n");
         return 1;
     }

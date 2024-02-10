@@ -11,11 +11,11 @@ import Exception.AutoException;
 
 public abstract class ProxyAutomobile {
     private static LinkedHashMapAutos lhmAutos;
-
+    private static Automobile a1;
     private Util util;
 
     public ProxyAutomobile(){
-        LinkedHashMapAutos lhmAutos = new LinkedHashMapAutos();
+        lhmAutos = new LinkedHashMapAutos();
         this.util = new Util();
     }
     public ProxyAutomobile(String fileName){
@@ -35,36 +35,38 @@ public abstract class ProxyAutomobile {
 
     public void buildAuto(String fileName) throws AutoException {
         util.setFilePath(fileName);
-        Automobile a1 = util.readFile();
+        a1 = util.readFile();
         lhmAutos.addAuto(a1.getName(), a1);
     }
     public void buildAuto() throws AutoException {
-        Automobile a1 = util.readFile();
+        a1 = util.readFile();
         lhmAutos.addAuto(a1.getName(), a1);
     }
     public void printAuto(String ModelName)throws AutoException{
         lhmAutos.getAutoByName(ModelName).print();
     }
 
-    //TODO: Change all these a1 into lhmAutos
-    public void updateOptionSetName(String ModelName, String OptionSetName, String newName)throws AutoException{
+    //TODO: Question: Should these methods be synchronized? (a1 is being "get" by this method)
+    public synchronized void updateOptionSetName(String ModelName, String OptionSetName, String newName)throws AutoException{
+        a1 = lhmAutos.getAutoByName(ModelName);
         a1.updateOptionSet(OptionSetName, newName);
     }
-    public void updateOptionPrice(String ModelName, String OptionName, String Option, double newPrice)throws AutoException{
+    public synchronized void updateOptionPrice(String ModelName, String OptionName, String Option, double newPrice)throws AutoException{
+        a1 = lhmAutos.getAutoByName(ModelName);
         a1.updateOptionPrice(OptionName, Option, newPrice);
     }
 
-    public synchronized void addAuto(String key, Automobile value){
-        this.lhmAutos.addAuto(key, value);
+    public void addAuto(String key, Automobile value){
+        lhmAutos.addAuto(key, value);
     }
-    public synchronized void deleteAutoByName(String name){
-        this.lhmAutos.deleteAutoByName(name);
+    public void deleteAutoByName(String name){
+        lhmAutos.deleteAutoByName(name);
     }
-    public synchronized Automobile getAutoByName(String name){
-        return this.lhmAutos.getAutoByName(name);
+    public Automobile getAutoByName(String name){
+        return lhmAutos.getAutoByName(name);
     }
-    public synchronized void printAll(){
-        this.lhmAutos.printAll();
+    public void printAll(){
+        lhmAutos.printAll();
     }
 
 }

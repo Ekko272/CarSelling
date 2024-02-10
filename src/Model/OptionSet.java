@@ -46,10 +46,10 @@ public class OptionSet implements Serializable {
     protected OptionSet(){
         this.opt = new ArrayList<>();
     }
-    protected OptionSet(String n, int size)
+    protected OptionSet(String n)
     {
         name = n;
-        opt = new ArrayList<>(size);
+        opt = new ArrayList<>();
     }
 
     public void setOpt(ArrayList<Option> opt) {

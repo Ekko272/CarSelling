@@ -28,8 +28,6 @@ public class Util {
 
     public Automobile readFile() throws AutoException{
         Automobile automotive = new Automobile();
-        int numOfOptionSets;
-        int numOfOptions;
         String name;
         String temp = "";
         double price;
@@ -75,25 +73,6 @@ public class Util {
 
 
                 problemMet = false;
-                
-                temp = buff.readLine();
-                try {
-                    if (temp.equals("")) {
-                        pass = false;
-                        problemMet = true;
-                        throw new AutoException(3, "Missing Number of OptionSets.");
-                    }
-                }catch (AutoException e){
-                    e.fixProblem(3, arr);
-                    numOfOptionSets = Integer.parseInt(arr[0]);
-
-                    pass = true;
-                }
-                if(problemMet == false) {
-                    numOfOptionSets = Integer.parseInt(temp);//set the third line in txt to the # of OptionSet
-                }
-
-                problemMet = false;
 
                 boolean eof = false;
                 while (!eof) {
@@ -109,8 +88,7 @@ public class Util {
                         } catch (AutoException e) {
                             e.fixProblem(4, arr);
                             name = arr[0];
-                            numOfOptions = Integer.parseInt(buff.readLine());
-                            automotive.addOpset(counter, name, numOfOptions);
+                            automotive.addOpset(counter, name);
                             counter++;
                             optionCounter = 0;
                             pass = true;
@@ -118,8 +96,7 @@ public class Util {
 
                         if (problemMet == false) {
                             name = temp;
-                            numOfOptions = Integer.parseInt(buff.readLine());
-                            automotive.addOpset(counter, name, numOfOptions);
+                            automotive.addOpset(counter, name);
                             counter++;
                             optionCounter = 0;
                         }
