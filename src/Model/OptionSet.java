@@ -70,6 +70,9 @@ public class OptionSet implements Serializable {
     protected void addOpt(String name, double price, int index){
         opt.add(index, new Option(name, price));
     }
+    protected void addOpt(String name, double price){
+        opt.add(new Option(name, price));
+    }
     protected String getName() {
         return name;
     }
