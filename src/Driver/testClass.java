@@ -25,7 +25,6 @@ public class testClass implements Runnable {
     public testClass(int x) {
         this.x = x;
     }
-    @Override
     public void run() {
         switch (x) {
             case 1:
