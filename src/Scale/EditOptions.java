@@ -1,9 +1,9 @@
 package Scale;
 
-import Adapter.ModifyLHMAutos;
+import Adapter.EditOptionInter;
 
 public class EditOptions implements Runnable {
-    private ModifyLHMAutos modifyLHMAutos;
+    private EditOptionInter eoi;
     
     private String autoNameToEdit;
     private String optionSetName;
@@ -17,11 +17,11 @@ public class EditOptions implements Runnable {
     2: Add
     */
 
-    public EditOptions(ModifyLHMAutos auto){
-        this.modifyLHMAutos = auto;
+    public EditOptions(EditOptionInter auto){
+        this.eoi = auto;
     }
-    public EditOptions(ModifyLHMAutos auto, String m, String os, String o, String n, double p){
-        this.modifyLHMAutos = auto;
+    public EditOptions(EditOptionInter auto, String m, String os, String o, String n, double p){
+        this.eoi = auto;
         this.optionSetName = os;
         this.autoNameToEdit = m;
         this.oldOptName = o;
@@ -65,13 +65,13 @@ public class EditOptions implements Runnable {
     public void run(){
         switch (operation) {
             case 0:
-                modifyLHMAutos.getAutoByName(autoNameToEdit).updateOption(oldOptName, newOptName, newOptPrice);
+                eoi.updateOption(autoNameToEdit, oldOptName, newOptName, newOptPrice);
                 break;
             case 1:
-                modifyLHMAutos.getAutoByName(autoNameToEdit).deleteOption(oldOptName);
+                eoi.deleteOption(autoNameToEdit, oldOptName);
                 break;
             case 2:
-                modifyLHMAutos.getAutoByName(autoNameToEdit).addOption(optionSetName, newOptName, newOptPrice);
+                eoi.addOption(autoNameToEdit, optionSetName, newOptName, newOptPrice);
             default:
                 break;
         }

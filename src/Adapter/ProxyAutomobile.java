@@ -69,4 +69,14 @@ public abstract class ProxyAutomobile {
         lhmAutos.printAll();
     }
 
+    public void addOption(String autoName, String OpSetName, String name, double price){
+        lhmAutos.getAutoByName(autoName).addOption(OpSetName, name, price);
+    }
+    public void deleteOption(String autoName, String optionName){
+        lhmAutos.getAutoByName(autoName).deleteOption(optionName);
+    }
+    public void updateOption(String autoName, String name, String newName, double newPrice){
+        lhmAutos.getAutoByName(autoName).updateOption(name, newName, newPrice);
+    }
+
 }

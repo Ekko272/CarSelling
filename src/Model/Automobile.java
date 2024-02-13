@@ -220,7 +220,6 @@ public class Automobile implements Serializable, ChoiceAuto {
         return -1;
     }
 
-
     public synchronized int updateOption(String name, String newName, double newPrice){
         int []index = findOptionWithName(name);
         if (index != null){
@@ -309,19 +308,6 @@ public class Automobile implements Serializable, ChoiceAuto {
 
 
     public synchronized int deleteOption(String name) {
-        //If available = false, wait() until available = true
-        //Which means add needs to be happened before delete
-        while (!available){
-            System.out.printf("---------------------------------------------------------\n");
-            System.out.printf("- Delete got the lock first, but now Waiting for Adding -\n");
-            System.out.printf("---------------------------------------------------------\n");
-            try{
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-
         int []indexArr = findOptionWithName(name);
         if (indexArr == null){
             System.out.println("No such element.");
@@ -332,34 +318,15 @@ public class Automobile implements Serializable, ChoiceAuto {
         System.out.printf(" -Option [" + name + "] deleting succeed -\n");
         System.out.printf("------------------------------------------\n");
 
-        available = false;
-        notifyAll();
         return 1;
     }
 
     public synchronized void addOption(String OpSetName, String name, double price) {
-        while(available){
-            System.out.printf("-----------\n");
-            System.out.printf("- Waiting -\n");
-            System.out.printf("-----------\n");
-            try{
-                wait();
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        System.out.printf("------------------------\n");
-        System.out.printf("- Now addOption adding -\n");
-        System.out.printf("------------------------\n");
-
         int index = findOptionSetWithName(OpSetName);
         this.opset.get(index).addOpt(name, price);
         System.out.printf("---------------------------------------------------------\n");
         System.out.printf(" -Option [" + name + ": $ " + price + "] adding succeed -\n");
         System.out.printf("---------------------------------------------------------\n");
-        available = true;
-        notifyAll();
-
     }
 
 
