@@ -1,3 +1,4 @@
+C:\Users\17212\.jdks\openjdk-21.0.2\bin\java.exe "-javaagent:D:\Javaa\IntelliJ IDEA Community Edition 2023.3.3\lib\idea_rt.jar=49393:D:\Javaa\IntelliJ IDEA Community Edition 2023.3.3\bin" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\17212\OneDrive\桌面\CIS35B\CarSelling\out\production\CarSelling Driver.Driver
 Reading completed!
 Name: ZWT
 
@@ -32,12 +33,17 @@ Power Moonroof
 present  $595.0
 not present  $0.0
 
-Found [Color] at index 0.
+Updating
+Updating
+Found [Manual] in option set Transmission at index 1.
+Successfully updated!
+Found [Automatic] in option set Transmission at index 0.
+Successfully updated!
 Name: ZWT
 
 Base Price: 18445.0
 
-NewNameColor
+Color
 Fort Knox Gold Clearcoat Metallic  $0.0
 Liquid Grey Clearcoat Metallic  $0.0
 Infra-Red Clearcoat  $0.0
@@ -50,8 +56,8 @@ Pitch Black Clearcoat  $0.0
 Cloud 9 White Clearcoat  $0.0
 
 Transmission
-Automatic  $0.0
-Manual  $-815.0
+Altered By Thread 2  $2225.0
+Altered By Thread 1  $8899.0
 
 Brakes/Traction Control
 Standard  $0.0
@@ -66,8 +72,6 @@ Power Moonroof
 present  $595.0
 not present  $0.0
 
-Reading completed!
-Reading completed!
-ZWS
-Second Car
-Third Car
+Main method finished
+
+Process finished with exit code 0

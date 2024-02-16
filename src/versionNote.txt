@@ -1,5 +1,9 @@
-1.
+1.0
 Put lhmAutos = new LinkedHashMapAutos(); from the default constructor of ProxyAutomobile into buildAuto() method.
 Therefore, there would not be null pointer error when we instantiate EditOptionInter object to modify the static object
 LHMAutos, because lhmAutos = new LinkedHashMapAutos(); will be called again when EditOptionInter object is declared when
 it is in the default constructor of ProxyAutomobile.
+
+1.1
+Create a new method called initializeLHMAuto() and put it in ModifyLHMAuto interface.
+Call it only once in the whole program.

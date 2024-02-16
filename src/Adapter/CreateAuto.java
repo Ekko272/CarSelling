@@ -7,6 +7,7 @@
 package Adapter;
 import Exception.AutoException;
 public interface CreateAuto {
-    public void buildAuto(String fileName) throws AutoException;
-    public void printAuto(String ModelName) throws AutoException;
+    void buildAuto(String fileName) throws AutoException;
+    void printAuto(String ModelName) throws AutoException;
+
 }

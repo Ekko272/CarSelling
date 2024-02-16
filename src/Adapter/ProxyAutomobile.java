@@ -31,10 +31,12 @@ public abstract class ProxyAutomobile {
         this.util.setFilePath(fileName);
     }
 
+    public void initializeLHMAutos(){
+        lhmAutos = new LinkedHashMapAutos();
+    }
     public void buildAuto(String fileName) throws AutoException {
         util.setFilePath(fileName);
         a1 = util.readFile();
-        lhmAutos = new LinkedHashMapAutos();
         lhmAutos.addAuto(a1.getName(), a1);
     }
     public void buildAuto() throws AutoException {

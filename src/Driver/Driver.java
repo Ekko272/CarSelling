@@ -8,11 +8,17 @@ package Driver;
 import Adapter.BuildAuto;
 import Adapter.CreateAuto;
 import Adapter.EditOptionInter;
+import Adapter.ModifyLHMAuto;
 import Exception.AutoException;
 import Scale.EditOptions;
 
 public class Driver {
     public static void main(String[] args) throws AutoException, InterruptedException {
+
+        //Initialize static object LHMAutos.
+        //This method only call once in the whole program
+        ModifyLHMAuto initialize = new BuildAuto();
+        initialize.initializeLHMAutos();
 
         CreateAuto newAuto = new BuildAuto();
         newAuto.buildAuto("C:\\Users\\17212\\OneDrive\\桌面\\CIS35B\\CarSelling\\src\\info.txt");
