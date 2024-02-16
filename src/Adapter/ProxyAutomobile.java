@@ -15,7 +15,6 @@ public abstract class ProxyAutomobile {
     private Util util;
 
     public ProxyAutomobile(){
-        lhmAutos = new LinkedHashMapAutos();
         this.util = new Util();
     }
     public ProxyAutomobile(String fileName){
@@ -32,21 +31,21 @@ public abstract class ProxyAutomobile {
         this.util.setFilePath(fileName);
     }
 
-
     public void buildAuto(String fileName) throws AutoException {
         util.setFilePath(fileName);
         a1 = util.readFile();
+        lhmAutos = new LinkedHashMapAutos();
         lhmAutos.addAuto(a1.getName(), a1);
     }
     public void buildAuto() throws AutoException {
         a1 = util.readFile();
+        lhmAutos = new LinkedHashMapAutos();
         lhmAutos.addAuto(a1.getName(), a1);
     }
     public void printAuto(String ModelName)throws AutoException{
         lhmAutos.getAutoByName(ModelName).print();
     }
 
-    //TODO: Question: Should these methods be synchronized? (a1 is being "get" by this method)
     public synchronized void updateOptionSetName(String ModelName, String OptionSetName, String newName)throws AutoException{
         a1 = lhmAutos.getAutoByName(ModelName);
         a1.updateOptionSet(OptionSetName, newName);
@@ -70,6 +69,7 @@ public abstract class ProxyAutomobile {
     }
 
     public void addOption(String autoName, String OpSetName, String name, double price){
+
         lhmAutos.getAutoByName(autoName).addOption(OpSetName, name, price);
     }
     public void deleteOption(String autoName, String optionName){

@@ -9,7 +9,7 @@ public class LinkedHashMapAutos {
 
     public LinkedHashMap<String, Automobile> getLHMAutos() {return LHMAutos;}
     public void setLHMAutos(LinkedHashMap<String, Automobile> LHMAutos) {this.LHMAutos = LHMAutos;}
-    public LinkedHashMapAutos(){this.LHMAutos = new LinkedHashMap<>();}
+    public LinkedHashMapAutos(){LHMAutos = new LinkedHashMap<>();}
     public LinkedHashMapAutos(LinkedHashMap<String, Automobile> LHMAutos) {this.LHMAutos = LHMAutos;}
 
     public void addAuto(String key, Automobile value){

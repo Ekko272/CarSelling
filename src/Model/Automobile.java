@@ -11,6 +11,9 @@ package Model;
 /*
 I have made the methods in this class synchronized since all the operations for ProxyAutomobile starts from here,
 and since the OptionSet class is protected, the best solution for me is making methods of Automobile class synchronized.
+Synchronized avoid data corruption because it only allows one method access the data at a time when there are multiple thread running.
+My implement of EditOption allows Updating, Adding and Deleting, so these three methods have to be synchronized.
+And in case of the future using of the other methods, I have made them synchronized as well.
  */
 import Adapter.ChoiceAuto;
 
@@ -25,7 +28,6 @@ public class Automobile implements Serializable, ChoiceAuto {
     private double basePrice;
     private ArrayList<OptionSet> opset;
     private ArrayList<OptionSet.Option> choice;
-    private static boolean available = false;
 
     public Automobile(){
         this.opset = new ArrayList<>();
@@ -156,7 +158,6 @@ public class Automobile implements Serializable, ChoiceAuto {
         return totalPrice;
     }
 
-    //TODO: ?Implement all the find methods with wait() and notify.
     //Find option set with given name, return the index number of it if found, return -1 if not
     public synchronized int findOptionSetWithName(String name){
         for(int i = 0; i < opset.size(); i++){

@@ -65,6 +65,7 @@ public class EditOptions implements Runnable {
     public void run(){
         switch (operation) {
             case 0:
+                System.out.println("Updating");
                 eoi.updateOption(autoNameToEdit, oldOptName, newOptName, newOptPrice);
                 break;
             case 1:
