@@ -12,8 +12,10 @@ import Adapter.ModifyLHMAuto;
 import Exception.AutoException;
 import Scale.EditOptions;
 
+//Added Comment is at the top of Automobile Class
 public class Driver {
     public static void main(String[] args) throws AutoException, InterruptedException {
+
 
         //Initialize static object LHMAutos.
         //This method only call once in the whole program

@@ -1,14 +1,11 @@
 /**
- * CIS 35B Assignment 3: Automotive.java
+ * CIS 35B Assignment 4: Automotive.java
  *
  * @author Xuanyu Liu
  */
-
-/*
-Comments for the added synchronized methods:
-*/
 package Model;
 /*
+Comments for the added synchronized methods:
 I have made the methods in this class synchronized since all the operations for ProxyAutomobile starts from here,
 and since the OptionSet class is protected, the best solution for me is making methods of Automobile class synchronized.
 Synchronized avoid data corruption because it only allows one method access the data at a time when there are multiple thread running.
