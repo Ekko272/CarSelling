@@ -51,7 +51,8 @@ public class SelectCarOptions {
             auto.updateOption(OptionName, newOptionName);
         }
 
-
+        auto.print();
+        System.out.println("Configuration succeed!");
 
 
 //        eo.setAutoNameToEdit(auto.getName());

@@ -45,8 +45,7 @@ public class DefaultServerSocket extends Thread{
                         bcmo.setState(1);
                         Object toClient = bcmo.processRequest(fromClient);
                         out.writeObject(toClient.toString());
-                        in.read();
-                        out.writeObject(menu);
+
                     }
 
                     if(fromClient.toString().equals("2")){
@@ -55,12 +54,11 @@ public class DefaultServerSocket extends Thread{
                         out.writeObject(toClient);
                         fromClient = in.readObject();
                         out.writeObject(bcmo.processRequest(fromClient));
-                        fromClient = in.readObject();
-                        out.writeObject(bcmo.getAutoByName(fromClient.toString()));//Write the client asked auto to client
-                        in.read();
+                        //Write the client asked auto to client
+
                     }
 
-                    if(fromClient.equals("0")){
+                    if(fromClient.toString().equals("0")){
                         System.out.println("Server turning down, bye bye...");
                         out.close();
                         in.close();
@@ -69,6 +67,9 @@ public class DefaultServerSocket extends Thread{
                         stop = true;
                         break;
                     }
+                    Object tempIgonre = in.readObject();
+                    out.writeObject(menu);
+
 
                 }
 

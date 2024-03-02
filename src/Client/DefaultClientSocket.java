@@ -52,19 +52,24 @@ public class DefaultClientSocket extends Thread{
 
                 }
                 else if (toServer.toString().equals("2")){
-                    sendOutput(toServer);
-                    fromServer = in.readObject();
+                    sendOutput(toServer);//request config
+                    fromServer = in.readObject();//ArrayList of all available models
                     toServer = clientProtocol.promptAllModelsAndChose(fromServer);
-                    sendOutput(toServer);
-                    fromServer = in.readObject();//Automobile instance
+                    sendOutput(toServer);//send the model name that client choose
+                    fromServer = in.readObject();//Automobile instance received from server
 
                     if(clientProtocol.isAutomobile(fromServer)) {
-
                         Automobile auto = (Automobile) fromServer;
-                        System.out.println("Auto: " + auto.getName() + " received from server. \nPress any key to start config it");
-                        toServer = stdIn.readLine();
+                        System.out.println("Auto: " + auto.getName() + " received from server. \nPress [ENTER] to start config it");
+                        stdIn.readLine();
                         clientProtocol.configureAuto(fromServer);
-                        //configure it
+                        System.out.println("Press any key to get back to menu");
+                        toServer = stdIn.readLine();
+
+                    }
+                    else{
+                        System.out.println("Auto does not exist, exiting...");
+                        System.exit(1);
                     }
                 }
                 sendOutput(toServer);
