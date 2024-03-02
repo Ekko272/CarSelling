@@ -90,6 +90,7 @@ public class Automobile implements Serializable, ChoiceAuto {
     public synchronized void addOpset(int index, String name){
         opset.add(index, new OptionSet(name));
     }
+    public synchronized void addOpset(String name){opset.add(new OptionSet(name));}
     public synchronized void setOption(int index, OptionSet Op, String name, double price){
         Op.setOpt(name, price, index);
     }

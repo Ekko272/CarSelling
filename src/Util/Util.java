@@ -8,8 +8,8 @@ package Util;
 import Model.Automobile;
 import Model.OptionSet;
 import Exception.*;
-
 import java.io.*;
+import java.util.Properties;
 
 public class Util {
     private String filePath;
@@ -141,8 +141,99 @@ public class Util {
         return automotive;
     }
 
+    public Properties getProps(){
+        Properties props = new Properties();
+        try {
+            FileInputStream in = new FileInputStream(filePath);
+            props.load(in);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return props;
+    }
 
+    public Automobile readProperties(Properties props){
+        Automobile automobile = new Automobile();
+        String CarMake = props.getProperty("CarMake");
+        if(CarMake != null) {
+            String CarName = props.getProperty("CarName");
+            String CarModel = props.getProperty("CarModel");
+            double basePrice = Double.parseDouble(props.getProperty("BasePrice"));
+            automobile.setName(CarName);
+            automobile.setMake(CarMake);
+            automobile.setModel(CarModel);
+            automobile.setBasePrice(basePrice);
+            String OptionSetTemp = "";
+            String OptionNameTemp = "";
+            double OptionPriceTemp = 0;
+            int i = 1;
+            int j = 1;
+            while(true){
+                OptionSetTemp = props.getProperty("OptionSet" + i);
+                if(OptionSetTemp == null){
+                    break;
+                }
+                automobile.addOpset(OptionSetTemp);
+                while(true){
+                    OptionNameTemp = props.getProperty("OptionSet" + i + "Name" + j);
+                    if(OptionNameTemp == null){
+                        break;
+                    }
+                    OptionPriceTemp = Double.parseDouble(props.getProperty("OptionSet" + i + "Price" + j));
+                    automobile.addOption(OptionSetTemp, OptionNameTemp, OptionPriceTemp);
+                    j++;
+                }
+                i++;
+                j = 1;
+            }
+        }
+        return automobile;
+    }
 
+    public Automobile readProperties(){
+        Automobile automobile = new Automobile();
+        Properties props = new Properties();
+        try {
+            FileInputStream in = new FileInputStream(filePath);
+            props.load(in);
+            String CarMake = props.getProperty("CarMake");
+            if(CarMake != null) {
+                String CarName = props.getProperty("CarName");
+                String CarModel = props.getProperty("CarModel");
+                double basePrice = Double.parseDouble(props.getProperty("BasePrice"));
+                automobile.setName(CarName);
+                automobile.setMake(CarMake);
+                automobile.setModel(CarModel);
+                automobile.setBasePrice(basePrice);
+                String OptionSetTemp = "";
+                String OptionNameTemp = "";
+                double OptionPriceTemp = 0;
+                int i = 1;
+                int j = 1;
+                while(true){
+                    OptionSetTemp = props.getProperty("OptionSet" + i);
+                    if(OptionSetTemp == null){
+                        break;
+                    }
+                    automobile.addOpset(OptionSetTemp);
+                    while(true){
+                        OptionNameTemp = props.getProperty("OptionSet" + i + "Name" + j);
+                        if(OptionNameTemp == null){
+                            break;
+                        }
+                        OptionPriceTemp = Double.parseDouble(props.getProperty("OptionSet" + i + "Price" + j));
+                        automobile.addOption(OptionSetTemp, OptionNameTemp, OptionPriceTemp);
+                        j++;
+                    }
+                    i++;
+                    j = 1;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return automobile;
+    }
 
     public void serializeAutomotive(Automobile automotive) throws IOException {
         ObjectOutputStream os = null;
@@ -169,7 +260,6 @@ public class Util {
         }
     }
 
-    //Deserializing method that reads the .ser file and return the object
     public Automobile deserializeAutomotive(String name) throws IOException, AutoException {
         ObjectInputStream os = null;
         Automobile automotive;

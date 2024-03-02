@@ -9,6 +9,10 @@ import Util.*;
 import Model.*;
 import Exception.AutoException;
 
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.Set;
+
 public abstract class ProxyAutomobile {
     private static LinkedHashMapAutos lhmAutos;
     private static Automobile a1;
@@ -34,10 +38,34 @@ public abstract class ProxyAutomobile {
     public void initializeLHMAutos(){
         lhmAutos = new LinkedHashMapAutos();
     }
-    public void buildAuto(String fileName) throws AutoException {
+    public Automobile buildAutoByProps(String fileName){
         util.setFilePath(fileName);
-        a1 = util.readFile();
-        lhmAutos.addAuto(a1.getName(), a1);
+        return util.readProperties();
+    }
+    public Automobile buildAutoByProps(Properties props){
+        return util.readProperties(props);
+    }
+    public Automobile buildAutoByText(String fileName) throws AutoException {
+        util.setFilePath(fileName);
+        return util.readFile();
+    }
+
+    public void buildAuto(String fileName, String fileType) {
+        try {
+            if (fileType.equals("properties")) {
+                util.setFilePath(fileName);
+                a1 = util.readProperties();
+                lhmAutos.addAuto(a1.getName(), a1);
+            } else if (fileType.equals("txt")) {
+                util.setFilePath(fileName);
+                a1 = util.readFile();
+                lhmAutos.addAuto(a1.getName(), a1);
+            } else {
+                System.out.println("Error: Invalid File Type.");
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
     public void buildAuto() throws AutoException {
         a1 = util.readFile();
@@ -48,6 +76,9 @@ public abstract class ProxyAutomobile {
         lhmAutos.getAutoByName(ModelName).print();
     }
 
+    public ArrayList<String> getAllExistedModel(){
+        return lhmAutos.getAllModels();
+    }
     public synchronized void updateOptionSetName(String ModelName, String OptionSetName, String newName)throws AutoException{
         a1 = lhmAutos.getAutoByName(ModelName);
         a1.updateOptionSet(OptionSetName, newName);
@@ -79,6 +110,11 @@ public abstract class ProxyAutomobile {
     }
     public void updateOption(String autoName, String name, String newName, double newPrice){
         lhmAutos.getAutoByName(autoName).updateOption(name, newName, newPrice);
+    }
+
+    public void addAutoToLHMAuto(Automobile automobile){
+        a1 = automobile;
+        lhmAutos.addAuto(a1.getName(), a1);
     }
 
 }

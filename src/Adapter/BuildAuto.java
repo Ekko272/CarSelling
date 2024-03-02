@@ -6,6 +6,8 @@
 
 package Adapter;
 
-public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ModifyLHMAuto, EditOptionInter{
+import Server.AutoServer;
+
+public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, ModifyLHMAuto, EditOptionInter, AutoServer {
 
 }

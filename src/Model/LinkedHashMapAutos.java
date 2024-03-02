@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Set;
@@ -20,6 +21,14 @@ public class LinkedHashMapAutos {
     }
     public Automobile getAutoByName(String name){
         return LHMAutos.get(name);
+    }
+    public ArrayList<String> getAllModels(){
+        Set<String> keys = this.LHMAutos.keySet();
+        ArrayList<String> modelList = new ArrayList<>();
+        for (String key : keys) {
+            modelList.add(key);
+        }
+        return modelList;
     }
     public void printAll(){
         Set st = LHMAutos.keySet();

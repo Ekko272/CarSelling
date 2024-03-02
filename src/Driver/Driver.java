@@ -10,51 +10,26 @@ import Adapter.CreateAuto;
 import Adapter.EditOptionInter;
 import Adapter.ModifyLHMAuto;
 import Exception.AutoException;
+import Server.*;
+import Client.*;
 import Scale.EditOptions;
 
 //Added Comment is at the top of Automobile Class
 public class Driver {
     public static void main(String[] args) throws AutoException, InterruptedException {
-
-
         //Initialize static object LHMAutos.
         //This method only call once in the whole program
         ModifyLHMAuto initialize = new BuildAuto();
         initialize.initializeLHMAutos();
 
-        CreateAuto newAuto = new BuildAuto();
-        newAuto.buildAuto("C:\\Users\\17212\\OneDrive\\桌面\\CIS35B\\CarSelling\\src\\info.txt");
-        newAuto.printAuto("ZWT");
-
-        EditOptionInter editAuto = new BuildAuto();
-
-        EditOptions eo = new EditOptions(editAuto);
-        eo.setAutoNameToEdit("ZWT");
-        eo.setOldOptName("Manual");
-        eo.setNewOptName("Altered By Thread 1");
-        eo.setNewOptPrice(8899);
-        eo.setOperation(0); //Update operation
-
-        EditOptions eo2 = new EditOptions(editAuto);
-        eo2.setAutoNameToEdit("ZWT");
-        eo2.setOldOptName("Automatic");
-        eo2.setNewOptName("Altered By Thread 2");
-        eo2.setNewOptPrice(2225);
-        eo2.setOperation(0); //Update operation
-
-        //Start threads
-        Thread t1 = new Thread(eo);
-        Thread t2 = new Thread(eo2);
-
-        t1.start();
-        t2.start();
-
-        t1.join();
-        t2.join();
+        CreateAuto auto = new BuildAuto();
+        auto.buildAuto("C:\\Users\\17212\\OneDrive\\桌面\\CIS35B\\CarSelling\\src\\car2.properties", "properties");
+        auto.buildAuto("C:\\Users\\17212\\OneDrive\\桌面\\CIS35B\\CarSelling\\src\\car3.properties", "properties");
 
 
-        newAuto.printAuto("ZWT");
-        System.out.println("Main method finished");
+        DefaultServerSocket server = new DefaultServerSocket(4455);
+        server.start();
+
 
 
     }
