@@ -67,7 +67,7 @@ public class DefaultServerSocket extends Thread{
                         stop = true;
                         break;
                     }
-                    Object tempIgonre = in.readObject();
+                    Object tempIgonre = in.readObject();//ignore the client's "Press any key to show the menu"
                     out.writeObject(menu);
 
 

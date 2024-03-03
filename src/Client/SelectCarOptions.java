@@ -14,55 +14,62 @@ public class SelectCarOptions {
     public SelectCarOptions() {}
 
 
+    //Takes an object, which should be an ArrayList that contains all the Model names inside the linkedHashMapAuto and received from server.
+    //Prompt the client to choose one of them, and check if the client has chosen the one that the linkedHashMapAuto contains.
     public String promptAllModelsAndChose(Object obj){
         if(obj instanceof ArrayList){
+            String clientChoice = "";
+            boolean validChoice = false;
             ArrayList <String> allModels = (ArrayList<String>) obj;
-            System.out.println("Choose one model from below to configure");
-            for (String allModel : allModels) {
-                System.out.println(allModel);
+
+            while(!validChoice) {
+                System.out.println("Choose one model from below to configure");
+                for (String allModel : allModels) {
+                    System.out.println(allModel);
+                }
+                clientChoice = in.nextLine();
+                if (allModels.contains(clientChoice)) {
+                    validChoice = true;
+                }else {
+                    System.out.println("Invalid choice. Please choose from the available models.");
+                }
             }
-            return in.nextLine();
+            return clientChoice;
+
         }
-        System.err.println("Not an ArrayList here");
+        System.err.println("Model List does not exist/Something wrong with the BuildCarModelOptions method");
         return null;
     }
 
 
-    public void configureAuto(Object obj) throws InterruptedException {
-        EditOptionInter editAuto = new BuildAuto();
-        EditOptions eo = new EditOptions(editAuto);
-        Automobile auto = (Automobile) obj;
-        auto.print();
-        System.out.println("Enter the Option name you want to configure: ");
-        System.out.print("Old: ");
-        String OptionName = in.nextLine();
-        System.out.print("New: ");
-        String newOptionName = in.nextLine();
-        double newPrice;
-        System.out.print("Option has price: " + auto.getOptionChoicePrice(OptionName) + ". Do you want to change it? (y/n)");
-        if (in.nextLine().equalsIgnoreCase("y")){
-            System.out.print("Enter the new price: ");
-            newPrice = Double.parseDouble(in.nextLine());
-            System.out.println("Starting configure...");
-            auto.updateOption(OptionName, newOptionName, newPrice);
+    //Takes an object, which should be an Automobile and received from server.
+    //Prompt client to configure it on the CLIENT SIDE
+    public void configureAuto(Object obj){
+        try {
+            Automobile auto = (Automobile) obj;
+            auto.print();
+            System.out.println("Enter the Option name you want to configure: ");
+            System.out.print("Old: ");
+            String OptionName = in.nextLine();
+            System.out.print("New: ");
+            String newOptionName = in.nextLine();
+            double newPrice;
+            System.out.print("Option has price: " + auto.getOptionChoicePrice(OptionName) + ". Do you want to change it? (y/n)");
+            if (in.nextLine().equalsIgnoreCase("y")) {
+                System.out.print("Enter the new price: ");
+                newPrice = Double.parseDouble(in.nextLine());
+                System.out.println("Starting configure...");
+                auto.updateOption(OptionName, newOptionName, newPrice);
+            } else {
+                System.out.println("Starting configure...");
+                auto.updateOption(OptionName, newOptionName);
+            }
+
+            auto.print();
+            System.out.println("Configuration succeed!");
+        }catch (NumberFormatException e){
+            System.err.println("Please enter a number for new price");
         }
-        else{
-            System.out.println("Starting configure...");
-            auto.updateOption(OptionName, newOptionName);
-        }
-
-        auto.print();
-        System.out.println("Configuration succeed!");
-
-
-//        eo.setAutoNameToEdit(auto.getName());
-//        eo.setOldOptName(OptionName);
-//        eo.setNewOptName(newOptionName);
-//        eo.setOperation(0); //Update operation
-//
-//        Thread t1 = new Thread(eo);
-//        t1.start();
-//        t1.join();
 
     }
 

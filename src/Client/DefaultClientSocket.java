@@ -65,13 +65,18 @@ public class DefaultClientSocket extends Thread{
                         clientProtocol.configureAuto(fromServer);
                         System.out.println("Press any key to get back to menu");
                         toServer = stdIn.readLine();
-
                     }
                     else{
                         System.out.println("Auto does not exist, exiting...");
                         System.exit(1);
                     }
                 }
+                else if(toServer.toString().equals("0")){
+                    closeConnection();
+                    System.out.println("I'll see you next time, bye bye :)");
+                    break;
+                }
+
                 sendOutput(toServer);
             }
         }catch (Exception e){
@@ -83,6 +88,25 @@ public class DefaultClientSocket extends Thread{
         try{
             out.writeObject(obj);
         }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    public void closeConnection() {
+        try {
+            if (out != null) {
+                out.close();
+            }
+            if (in != null) {
+                in.close();
+            }
+            if (stdIn != null) {
+                stdIn.close();
+            }
+            if (sock != null) {
+                sock.close();
+            }
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
