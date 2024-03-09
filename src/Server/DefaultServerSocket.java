@@ -13,8 +13,8 @@ public class DefaultServerSocket extends Thread{
             + "Enter 2 to configure an Automobile\n"
             + "Enter 0 to terminate connection\n";
 
-    public DefaultServerSocket(int port){
-        this.port = port;
+    public DefaultServerSocket(int portt){
+        this.port = portt;
         try{
             this.server = new ServerSocket(port);
         }catch (Exception e){
