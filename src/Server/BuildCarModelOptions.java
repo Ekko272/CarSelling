@@ -35,7 +35,7 @@ public class BuildCarModelOptions extends ProxyAutomobile {
                 addAutoToLHMAuto(buildAutoByProps((Properties)obj));
             }
             toClient = "Automobile object successfully added to database\n"
-                    + "Press any key to return to main menu";
+                    + "Do you want to continue on menu? (y/n)";
         }
         else if (state == REQUEST_CONFIGURE_AUTO) {
 

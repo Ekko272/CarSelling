@@ -160,7 +160,7 @@ public class Automobile implements Serializable, ChoiceAuto {
     public synchronized int findOptionSetWithName(String name){
         for(int i = 0; i < opset.size(); i++){
             if (opset.get(i).getName().equals(name)){
-                System.out.printf("Found [" + name + "] at index " + i + ".\n");
+//                System.out.printf("Found [" + name + "] at index " + i + ".\n");
                 return i;
             }
         }
@@ -323,9 +323,7 @@ public class Automobile implements Serializable, ChoiceAuto {
     public synchronized void addOption(String OpSetName, String name, double price) {
         int index = findOptionSetWithName(OpSetName);
         this.opset.get(index).addOpt(name, price);
-        System.out.printf("---------------------------------------------------------\n");
-        System.out.printf(" -Option [" + name + ": $ " + price + "] adding succeed -\n");
-        System.out.printf("---------------------------------------------------------\n");
+
     }
 
 

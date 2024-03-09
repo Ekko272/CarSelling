@@ -1,5 +1,5 @@
 /**
- * CIS 35B Assignment 4: Driver.java
+ * CIS 35B Assignment 5: ServerDriver.java
  *
  * @author Xuanyu Liu
  */
@@ -7,15 +7,12 @@ package Driver;
 
 import Adapter.BuildAuto;
 import Adapter.CreateAuto;
-import Adapter.EditOptionInter;
 import Adapter.ModifyLHMAuto;
 import Exception.AutoException;
 import Server.*;
-import Client.*;
-import Scale.EditOptions;
 
-//Added Comment is at the top of Automobile Class
-public class Driver {
+//This driver class represents the server side. It adds some cars into lhmautos before the server starts
+public class ServerDriver {
     public static void main(String[] args) throws AutoException, InterruptedException {
         //Initialize static object LHMAutos.
         //This method only call once in the whole program
@@ -23,8 +20,8 @@ public class Driver {
         initialize.initializeLHMAutos();
 
         CreateAuto auto = new BuildAuto();
-        auto.buildAuto("C:\\Users\\17212\\OneDrive\\桌面\\CIS35B\\CarSelling\\src\\car2.properties", "properties");
-        auto.buildAuto("C:\\Users\\17212\\OneDrive\\桌面\\CIS35B\\CarSelling\\src\\car3.properties", "properties");
+        auto.buildAuto("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/car2.properties", "properties");
+        auto.buildAuto("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/car3.properties", "properties");
 
 
         DefaultServerSocket server = new DefaultServerSocket(4455);
