@@ -20,12 +20,14 @@ public class ServerDriver {
         initialize.initializeLHMAutos();
 
         CreateAuto auto = new BuildAuto();
-        auto.buildAuto("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/car2.properties", "properties");
-        auto.buildAuto("/Users/liuxuanyu/Desktop/CIS 35B/Lab1/src/car3.properties", "properties");
+        auto.buildAuto("C:\\Users\\17212\\OneDrive\\桌面\\CIS35B\\CarSelling\\src\\car2.properties", "properties");
+        auto.buildAuto("C:\\Users\\17212\\OneDrive\\桌面\\CIS35B\\CarSelling\\src\\car3.properties", "properties");
+
 
 
         DefaultServerSocket server = new DefaultServerSocket(4455);
         server.start();
+
 
 
 

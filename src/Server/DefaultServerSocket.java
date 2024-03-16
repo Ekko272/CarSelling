@@ -27,14 +27,15 @@ public class DefaultServerSocket extends Thread{
     public void run(){
         System.out.println("Server started, waiting for request...");
         Socket clientSocket = null;
-        try{
-            clientSocket = server.accept();
-        }catch (Exception e){
-            System.err.println("Error establishing client connection");
-            System.exit(1);
+        while(true) {
+            try {
+                clientSocket = server.accept();
+            } catch (Exception e) {
+                System.err.println("Error establishing client connection");
+                System.exit(1);
+            }
+            new DefaultClientSocket(clientSocket).start();
         }
-        new DefaultClientSocket(clientSocket).start();
-
 
 
 

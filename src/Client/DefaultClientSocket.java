@@ -72,6 +72,9 @@ public class DefaultClientSocket extends Thread{
                     }
                 }
                 else if(toServer.toString().equals("0")){
+                    sendOutput(toServer);
+                    sendOutput(toServer);
+                    sleep(1000);
                     closeConnection();
                     System.out.println("I'll see you next time, bye bye :)");
                     break;

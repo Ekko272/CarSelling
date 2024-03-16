@@ -22,6 +22,7 @@ public class DefaultClientSocket extends Thread{
     }
 
     public void handleConnection() {
+        boolean terminate = false;
         while (!stop) {
             try {
                 System.out.println("Connected!");
@@ -52,15 +53,17 @@ public class DefaultClientSocket extends Thread{
 
                     }
 
-                    if (fromClient.toString().equals("0") && fromClient.toString().equalsIgnoreCase("n")) {
-                        System.out.println("Disconnecting, bye bye...");
-                        out.close();
-                        in.close();
-                        clientSocket.close();
+                    if (fromClient.toString().equals("0") || fromClient.toString().equalsIgnoreCase("n")) {
+                        terminate = true;
+                    }
+                    Object tempIgonre = in.readObject();//ignore the client's "Press any key to show the menu"
+                    if(terminate){
+                        this.clientSocket.close();
+                        this.out.close();
+                        this.in.close();
                         stop = true;
                         break;
                     }
-                    Object tempIgonre = in.readObject();//ignore the client's "Press any key to show the menu"
                     sendOutput(menu);
                 }
 
