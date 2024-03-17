@@ -48,7 +48,15 @@ public class DefaultClientSocket extends Thread{
                         Object toClient = bcmo.getAllExistedModel();//ArrayList<String>
                         sendOutput(toClient);
                         fromClient = in.readObject();
+                        if(fromClient.equals("0")){
+                            this.clientSocket.close();
+                            this.out.close();
+                            this.in.close();
+                            stop = true;
+                            break;
+                        }
                         sendOutput(bcmo.processRequest(fromClient));
+                        fromClient = in.readObject();
                         //Write the client asked auto to client
 
                     }

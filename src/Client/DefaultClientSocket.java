@@ -95,6 +95,18 @@ public class DefaultClientSocket extends Thread{
         }
     }
 
+    public Object recieveObject() {
+        try {
+            Object obj = this.in.readObject();
+            return obj;
+        }catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+
+
     public void closeConnection() {
         try {
             if (out != null) {
